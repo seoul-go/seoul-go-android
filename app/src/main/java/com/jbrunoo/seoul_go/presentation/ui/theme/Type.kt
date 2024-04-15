@@ -1,4 +1,4 @@
-package com.jbrunoo.seoul_go.ui.theme
+package com.jbrunoo.seoul_go.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

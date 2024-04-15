@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.jbrunoo.seoul_go.presentation.feature.event.EventScreen
-import com.jbrunoo.seoul_go.ui.theme.Seoul_goTheme
+import com.jbrunoo.seoul_go.presentation.ui.theme.Seoul_goTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
