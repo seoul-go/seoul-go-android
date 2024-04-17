@@ -1,6 +1,5 @@
 package com.jbrunoo.seoul_go.presentation.navigation
 
-import androidx.annotation.StringRes
 import com.jbrunoo.seoul_go.R
 
 object Route {
@@ -8,24 +7,26 @@ object Route {
     const val FEATURE = "feature"
 }
 
-sealed class NavItem(val route: String) {
-    data object LOGIN: NavItem("login")
-    data object MAIN: NavItem("main")
-    data object EVENT: NavItem("event-detail")
+sealed class RootNavItem(val route: String) {
+    data object LOGIN: RootNavItem("login")
+    data object MAIN: RootNavItem("main")
+    data object EVENT_DETAIL: RootNavItem("event-detail")
 }
 
-sealed class BottomNavItem(
+sealed class FeatureNavItem(
     val route: String,
     val icon: Int,
+    val title: String? = null
 ) {
-    data object HOME: BottomNavItem("home", R.drawable.home_light)
-    data object SEARCH: BottomNavItem("search", R.drawable.search_light)
-    data object LIKE: BottomNavItem("like", R.drawable.favorite_light)
-    data object MAP: BottomNavItem("map", R.drawable.map_light)
-    data object USER: BottomNavItem("user", R.drawable.user_light)
+    data object HOME: FeatureNavItem("home", R.drawable.home_light, "홈")
+    data object SEARCH: FeatureNavItem("search", R.drawable.search_light)
+    data object LIKE: FeatureNavItem("like", R.drawable.favorite_light, "찜")
+    data object MAP: FeatureNavItem("map", R.drawable.map_light, "지도")
+    data object USER: FeatureNavItem("user", R.drawable.user_light, "마이페이지")
+    data object EVENT: FeatureNavItem("event", R.drawable.home_light)
 }
 
 sealed class EventItem(val route: String) {
-    data object LOGIN: NavItem("login")
-    data object MAIN: NavItem("main")
+    data object LOGIN: RootNavItem("login")
+    data object MAIN: RootNavItem("main")
 }

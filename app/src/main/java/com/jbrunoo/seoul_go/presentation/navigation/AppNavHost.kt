@@ -21,16 +21,16 @@ import com.jbrunoo.seoul_go.presentation.feature.user.UserScreen
 fun RootNavHost(navHostController: NavHostController) {
     NavHost(
         navController = navHostController,
-        startDestination = NavItem.MAIN.route, // login 확인 후 main
+        startDestination = RootNavItem.MAIN.route, // login 확인 후 main
         route = Route.ROOT
     ) {
-        composable(NavItem.LOGIN.route) {
+        composable(RootNavItem.LOGIN.route) {
             LoginScreen()
         }
-        composable(NavItem.MAIN.route) {
+        composable(RootNavItem.MAIN.route) {
             MainScreen()
         }
-        composable(NavItem.EVENT.route) {
+        composable(RootNavItem.EVENT_DETAIL.route) {
             EventDetailScreen()
         }
     }
@@ -40,23 +40,23 @@ fun RootNavHost(navHostController: NavHostController) {
 fun FeatureNavHost(navHostController: NavHostController, paddingValues: PaddingValues) {
     NavHost(
         navController = navHostController,
-        startDestination = BottomNavItem.HOME.route,
+        startDestination = FeatureNavItem.HOME.route,
         modifier = Modifier.padding(paddingValues),
         route = Route.FEATURE
     ) {
-        composable(BottomNavItem.HOME.route) {
+        composable(FeatureNavItem.HOME.route) {
             HomeScreen(navHostController = navHostController)
         }
-        composable(BottomNavItem.SEARCH.route) {
+        composable(FeatureNavItem.SEARCH.route) {
             SearchScreen()
         }
-        composable(BottomNavItem.LIKE.route) {
+        composable(FeatureNavItem.LIKE.route) {
             LikeScreen()
         }
-        composable(BottomNavItem.MAP.route) {
+        composable(FeatureNavItem.MAP.route) {
             MapScreen()
         }
-        composable(BottomNavItem.USER.route) {
+        composable(FeatureNavItem.USER.route) {
             UserScreen()
         }
     }
