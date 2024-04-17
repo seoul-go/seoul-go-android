@@ -84,5 +84,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     // coil
     implementation(libs.coil.compose)
+    // animation-bottom-bar // https://github.com/exyte/AndroidAnimatedNavigationBar
+    implementation(libs.animated.navigation.bar)
 
 }

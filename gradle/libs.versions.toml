@@ -21,6 +21,7 @@ room = "2.6.1"
 kotlinx-serialization-json = "1.6.3"
 hilt-navigation-compose = "1.2.0"
 coil-compose = "2.6.0"
+animated-navigation-bar = "1.0.0"
 
 
 [plugins]
@@ -50,6 +51,7 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+animated-navigation-bar = { module = "com.exyte:animated-navigation-bar", version.ref = "animated-navigation-bar" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
