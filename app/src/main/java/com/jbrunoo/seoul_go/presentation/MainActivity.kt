@@ -9,7 +9,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.jbrunoo.seoul_go.presentation.feature.event.EventScreen
 import com.jbrunoo.seoul_go.presentation.navigation.RootNavHost
 import com.jbrunoo.seoul_go.presentation.ui.theme.Seoul_goTheme
 import dagger.hilt.android.AndroidEntryPoint

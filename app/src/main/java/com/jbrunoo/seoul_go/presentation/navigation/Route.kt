@@ -1,25 +1,32 @@
 package com.jbrunoo.seoul_go.presentation.navigation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Place
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.jbrunoo.seoul_go.R
 
 object Route {
     const val ROOT = "root"
-    const val MAIN = "main"
-    const val LOGIN = "login"
-    const val EVENT = "event"
+    const val FEATURE = "feature"
 }
-sealed class BottomNavItem(
+
+sealed class RootNavItem(val route: String) {
+    data object LOGIN: RootNavItem("login")
+    data object MAIN: RootNavItem("main")
+    data object EVENT_DETAIL: RootNavItem("event-detail")
+}
+
+sealed class FeatureNavItem(
     val route: String,
-    val icon: ImageVector,
-    val label: String
+    val icon: Int,
+    val title: String? = null
 ) {
-    data object SEARCH: BottomNavItem("search", Icons.Default.Search, "검색")
-    data object LIKE: BottomNavItem("like", Icons.Default.FavoriteBorder, "찜")
-    data object MAP: BottomNavItem("map", Icons.Default.Place, "지도")
-    data object MY: BottomNavItem("my", Icons.Default.Face, "마이")
+    data object HOME: FeatureNavItem("home", R.drawable.home_light, "홈")
+    data object SEARCH: FeatureNavItem("search", R.drawable.search_light)
+    data object LIKE: FeatureNavItem("like", R.drawable.favorite_light, "찜")
+    data object MAP: FeatureNavItem("map", R.drawable.map_light, "지도")
+    data object USER: FeatureNavItem("user", R.drawable.user_light, "마이페이지")
+    data object EVENT: FeatureNavItem("event", R.drawable.home_light)
+}
+
+sealed class EventItem(val route: String) {
+    data object LOGIN: RootNavItem("login")
+    data object MAIN: RootNavItem("main")
 }

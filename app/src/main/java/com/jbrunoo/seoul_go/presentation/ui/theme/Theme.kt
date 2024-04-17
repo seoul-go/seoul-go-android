@@ -1,7 +1,8 @@
 package com.jbrunoo.seoul_go.presentation.ui.theme
 
-import android.app.Activity
 import android.os.Build
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -9,11 +10,9 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
 
 private val LightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
@@ -80,6 +79,11 @@ private val DarkColorScheme = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
+val LocalAppDimens = staticCompositionLocalOf {
+    appDimens
+}
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Seoul_goTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -99,6 +103,11 @@ fun Seoul_goTheme(
     MaterialTheme(
       colorScheme = colorScheme,
       typography = Typography,
-      content = content
-    )
+    ) {
+        CompositionLocalProvider(
+            LocalOverscrollConfiguration provides null,
+            LocalAppDimens provides appDimens,
+            content = content
+        )
+    }
 }

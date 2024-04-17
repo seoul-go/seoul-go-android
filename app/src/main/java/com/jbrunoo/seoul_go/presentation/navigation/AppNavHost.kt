@@ -1,44 +1,63 @@
 package com.jbrunoo.seoul_go.presentation.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavGraphBuilder
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
-import com.jbrunoo.seoul_go.presentation.feature.event.EventScreen
+import com.jbrunoo.seoul_go.presentation.MainScreen
+import com.jbrunoo.seoul_go.presentation.feature.event_detail.EventDetailScreen
+import com.jbrunoo.seoul_go.presentation.feature.home.HomeScreen
+import com.jbrunoo.seoul_go.presentation.feature.like.LikeScreen
+import com.jbrunoo.seoul_go.presentation.feature.login.LoginScreen
+import com.jbrunoo.seoul_go.presentation.feature.map.MapScreen
+import com.jbrunoo.seoul_go.presentation.feature.search.SearchScreen
+import com.jbrunoo.seoul_go.presentation.feature.user.UserScreen
 
 
 @Composable
 fun RootNavHost(navHostController: NavHostController) {
     NavHost(
         navController = navHostController,
-        startDestination = Route.MAIN, // login 확인 후 main
+        startDestination = RootNavItem.MAIN.route, // login 확인 후 main
         route = Route.ROOT
     ) {
-        composable(Route.LOGIN) {
-
+        composable(RootNavItem.LOGIN.route) {
+            LoginScreen()
         }
-        bottomBarNavGraph(navHostController)
+        composable(RootNavItem.MAIN.route) {
+            MainScreen()
+        }
+        composable(RootNavItem.EVENT_DETAIL.route) {
+            EventDetailScreen()
+        }
     }
 }
 
-fun NavGraphBuilder.bottomBarNavGraph(navHostController: NavHostController) {
-    navigation(startDestination = Route.EVENT, route = Route.MAIN) {
-        composable(Route.EVENT) {
-            EventScreen(navHostController = navHostController)
+@Composable
+fun FeatureNavHost(navHostController: NavHostController, paddingValues: PaddingValues) {
+    NavHost(
+        navController = navHostController,
+        startDestination = FeatureNavItem.HOME.route,
+        modifier = Modifier.padding(paddingValues),
+        route = Route.FEATURE
+    ) {
+        composable(FeatureNavItem.HOME.route) {
+            HomeScreen(navHostController = navHostController)
         }
-        composable(BottomNavItem.SEARCH.route) {
-
+        composable(FeatureNavItem.SEARCH.route) {
+            SearchScreen()
         }
-        composable(BottomNavItem.LIKE.route) {
-
+        composable(FeatureNavItem.LIKE.route) {
+            LikeScreen()
         }
-        composable(BottomNavItem.MAP.route) {
-
+        composable(FeatureNavItem.MAP.route) {
+            MapScreen()
         }
-        composable(BottomNavItem.MY.route) {
-
+        composable(FeatureNavItem.USER.route) {
+            UserScreen()
         }
     }
 }
