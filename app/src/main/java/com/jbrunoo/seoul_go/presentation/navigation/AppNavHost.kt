@@ -41,14 +41,17 @@ fun FeatureNavHost(navHostController: NavHostController, paddingValues: PaddingV
     NavHost(
         navController = navHostController,
         startDestination = FeatureNavItem.HOME.route,
-        modifier = Modifier.padding(paddingValues),
+        modifier = Modifier.padding(
+            top = paddingValues.calculateTopPadding(),
+            bottom = paddingValues.calculateBottomPadding()
+        ),
         route = Route.FEATURE
     ) {
         composable(FeatureNavItem.HOME.route) {
             HomeScreen(navHostController = navHostController)
         }
         composable(FeatureNavItem.SEARCH.route) {
-            SearchScreen()
+            SearchScreen(navHostController)
         }
         composable(FeatureNavItem.LIKE.route) {
             LikeScreen()
