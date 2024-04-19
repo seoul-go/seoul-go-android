@@ -1,11 +1,14 @@
 package com.jbrunoo.seoul_go.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jbrunoo.seoul_go.presentation.components.BottomBar
@@ -20,14 +23,6 @@ fun MainScreen() {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val navItems = listOf(
-        FeatureNavItem.HOME,
-        FeatureNavItem.SEARCH,
-        FeatureNavItem.LIKE,
-        FeatureNavItem.MAP,
-        FeatureNavItem.USER,
-    )
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color.Transparent,
@@ -35,15 +30,16 @@ fun MainScreen() {
             val title = getTitleForRoute(currentRoute)
             val showNavIcon = currentRoute != FeatureNavItem.HOME.route
             title?.let {
-                TopBar(navHostController = navHostController, title, showNavIcon)
+                TopBar(
+                    showNavIcon = showNavIcon,
+                    navigateUp = { navHostController.navigateUp() }
+                ) {
+                    Text(text = title, modifier = Modifier.offset(x = (-16).dp))
+                }
             }
         },
         bottomBar = {
-            BottomBar(
-                navHostController = navHostController,
-                navItems = navItems,
-                currentRoute = currentRoute
-            )
+            BottomBar(navHostController = navHostController, currentRoute = currentRoute)
         }
     ) { paddingValues ->
         FeatureNavHost(navHostController = navHostController, paddingValues = paddingValues)

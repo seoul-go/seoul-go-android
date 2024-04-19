@@ -22,9 +22,16 @@ import com.jbrunoo.seoul_go.presentation.ui.theme.LocalAppDimens
 @Composable
 fun BottomBar(
     navHostController: NavHostController,
-    navItems: List<FeatureNavItem>,
     currentRoute: String?
 ) {
+    val navItems = listOf(
+        FeatureNavItem.HOME,
+        FeatureNavItem.SEARCH,
+        FeatureNavItem.LIKE,
+        FeatureNavItem.MAP,
+        FeatureNavItem.USER,
+    )
+
     BottomNavigation(
         modifier = Modifier
             .clip(RoundedCornerShape(topStart = LocalAppDimens.current.cornerRadius, topEnd = LocalAppDimens.current.cornerRadius))

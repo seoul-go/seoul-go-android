@@ -20,7 +20,7 @@ sealed class FeatureNavItem(
     val label: String
 ) {
     data object HOME :
-        FeatureNavItem(route = "home", title = "홈", icon = R.drawable.home_light, label = "홈")
+        FeatureNavItem(route = "home", title = "Seoul Go", icon = R.drawable.home_light, label = "홈")
 
     data object SEARCH :
         FeatureNavItem(route = "search", title = null, icon = R.drawable.search_light, label = "검색")
