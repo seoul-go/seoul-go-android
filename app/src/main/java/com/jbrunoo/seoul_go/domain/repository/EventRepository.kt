@@ -1,8 +1,8 @@
 package com.jbrunoo.seoul_go.domain.repository
 
-import com.jbrunoo.seoul_go.domain.entity.Event
+import com.jbrunoo.seoul_go.domain.model.Event
 import kotlinx.coroutines.flow.Flow
 
 interface EventRepository {
-    fun getEvents(): Flow<List<Event>>
+    fun fetchEvents(): Flow<List<Event>>
 }

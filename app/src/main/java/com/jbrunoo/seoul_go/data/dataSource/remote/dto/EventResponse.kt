@@ -1,6 +1,6 @@
 package com.jbrunoo.seoul_go.data.dataSource.remote.dto
 
-import com.jbrunoo.seoul_go.domain.entity.Event
+import com.jbrunoo.seoul_go.domain.model.Event
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
