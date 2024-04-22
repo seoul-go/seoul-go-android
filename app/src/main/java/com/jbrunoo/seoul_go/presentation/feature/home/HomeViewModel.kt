@@ -11,13 +11,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val getEventUseCase: FetchEventUseCase): ViewModel() {
+class HomeViewModel @Inject constructor(private val fetchEventUseCase: FetchEventUseCase): ViewModel() {
     private var _events = MutableStateFlow<List<Event>>(emptyList())
     val events = _events.asStateFlow()
 
     init {
         viewModelScope.launch {
-            getEventUseCase().collect {
+            fetchEventUseCase().collect {
                 _events.value = it
             }
         }

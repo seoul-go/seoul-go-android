@@ -16,7 +16,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.jbrunoo.seoul_go.presentation.navigation.FeatureNavItem
+import com.jbrunoo.seoul_go.presentation.navigation.MainNavItem
 import com.jbrunoo.seoul_go.presentation.ui.theme.LocalAppDimens
 
 @Composable
@@ -25,11 +25,10 @@ fun BottomBar(
     currentRoute: String?
 ) {
     val navItems = listOf(
-        FeatureNavItem.HOME,
-        FeatureNavItem.SEARCH,
-        FeatureNavItem.LIKE,
-        FeatureNavItem.MAP,
-        FeatureNavItem.USER,
+        MainNavItem.HOME,
+        MainNavItem.LIKE,
+        MainNavItem.MAP,
+        MainNavItem.USER,
     )
 
     BottomNavigation(
