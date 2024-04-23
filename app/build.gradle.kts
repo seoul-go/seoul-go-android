@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -21,6 +23,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "API_KEY", getProperty("API_KEY"))
+        buildConfigField("String", "BASE_URL", getProperty("BASE_URL"))
     }
 
     buildTypes {
@@ -41,6 +46,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.11"
@@ -51,6 +57,11 @@ android {
         }
     }
 }
+
+fun getProperty(property: String): String {
+    return gradleLocalProperties(rootDir).getProperty(property)
+}
+
 
 dependencies {
 
