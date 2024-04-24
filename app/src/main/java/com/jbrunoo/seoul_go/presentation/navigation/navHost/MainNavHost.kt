@@ -26,7 +26,7 @@ fun MainNavHost(rootNavController: NavHostController, mainNavController: NavHost
         route = Route.MAIN
     ) {
         composable(MainNavItem.HOME.route) {
-            HomeScreen(navHostController = mainNavController)
+            HomeScreen(rootNavController)
         }
         composable(MainNavItem.LIKE.route) {
             LikeScreen()
