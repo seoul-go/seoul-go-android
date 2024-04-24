@@ -10,7 +10,10 @@ import javax.inject.Inject
 
 class EventRepositoryImpl @Inject constructor(private val eventRemoteDataSource: EventRemoteDataSource) :
     EventRepository {
-    override fun fetchEvents(): Flow<List<Event>> =
-        eventRemoteDataSource.fetchEvents().map { it.map { it.toEvent() } }
+    override suspend fun fetchEvents(): Flow<List<Event>> {
+        return eventRemoteDataSource.fetchEvents()
+            .map { eventResponse ->
+                eventResponse.toEvent()
+            }
+    }
 }
-

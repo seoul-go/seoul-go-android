@@ -7,5 +7,5 @@ import javax.inject.Inject
 
 // useCase는 interface 등이 아니므로 @Module을 만들 필요 없음
 class FetchEventUseCase @Inject constructor(private val eventRepository: EventRepository) {
-    operator fun invoke(): Flow<List<Event>> = eventRepository.fetchEvents()
+    suspend operator fun invoke(): Flow<List<Event>> = eventRepository.fetchEvents()
 }
