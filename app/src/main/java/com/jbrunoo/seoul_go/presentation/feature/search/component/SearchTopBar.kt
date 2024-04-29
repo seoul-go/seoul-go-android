@@ -1,9 +1,9 @@
-package com.jbrunoo.seoul_go.presentation.feature.search.ui
+package com.jbrunoo.seoul_go.presentation.feature.search.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.VisualTransformation
@@ -51,7 +50,6 @@ fun SearchTopBar(
             }
         },
         backgroundColor = MaterialTheme.colorScheme.background,
-        elevation = 0.dp
     )
 }
 
@@ -64,25 +62,32 @@ private fun CustomTextField(
     modifier: Modifier = Modifier,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
+    val colors = TextFieldDefaults.colors(
+        focusedContainerColor = MaterialTheme.colorScheme.background,
+        unfocusedContainerColor = MaterialTheme.colorScheme.background,
+        disabledContainerColor = MaterialTheme.colorScheme.background,
+        focusedIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent,
+        disabledIndicatorColor = Color.Transparent,
+    )
 
-    BasicTextField(modifier = modifier
-        .height(40.dp)
-        .fillMaxSize()
-        .clip(RoundedCornerShape(LocalAppDimens.current.cornerRadius))
-        .background(
-            MaterialTheme.colorScheme.background
-        )
-        .border(
-            1.dp,
-            color = Color.LightGray,
-            RoundedCornerShape(LocalAppDimens.current.cornerRadius)
-        )
-        .padding(4.dp),
+    BasicTextField(
+        modifier = modifier
+            .height(40.dp)
+            .fillMaxWidth()
+            .background(Color.White)
+            .clip(RoundedCornerShape(LocalAppDimens.current.cornerRadius))
+            .border(
+                1.dp,
+                color = Color.LightGray,
+                RoundedCornerShape(LocalAppDimens.current.cornerRadius)
+            )
+            .padding(4.dp),
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
         interactionSource = interactionSource,
-        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+//        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         decorationBox = { innerTextField ->
             TextFieldDefaults.DecorationBox(
                 value = value,
@@ -105,8 +110,12 @@ private fun CustomTextField(
                             contentDescription = "clear all"
                         )
                     }
-                }
-
+                },
+                colors = colors,
+                contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(
+                    top = 0.dp,
+                    bottom = 0.dp,
+                )
             )
         }
     )
