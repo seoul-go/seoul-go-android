@@ -1,6 +1,7 @@
 package com.jbrunoo.seoul_go.data.dataSource.remote.dto
 
 
+import com.jbrunoo.seoul_go.domain.model.Event
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -51,3 +52,30 @@ data class Row(
     @SerialName("USE_TRGT")
     val useTrgt: String
 )
+
+fun Row.toEvent(): Event {
+    return Event(
+        CODENAME = codeName,
+        DATE = date,
+        END_DATE = endDate,
+        ETC_DESC = etcDesc,
+        GUNAME = guName,
+        IS_FREE = isFree,
+        LAT = lat,
+        LOT = lot,
+        MAIN_IMG = mainImg,
+        ORG_LINK = orgLink,
+        ORG_NAME = orgName,
+        PLACE = place,
+        PLAYER = player,
+        PROGRAM = program,
+        RGSTDATE = rgstDate,
+        STRTDATE = strtDate,
+        THEMECODE = themeCode,
+        TICKET = ticket,
+        TITLE = title,
+        USE_FEE = useFee,
+        USE_TRGT = useTrgt,
+        IS_FAVORITE = false
+    )
+}
