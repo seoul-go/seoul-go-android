@@ -22,6 +22,8 @@ room = "2.6.1"
 kotlinx-serialization-json = "1.6.3"
 hilt-navigation-compose = "1.2.0"
 coil-compose = "2.6.0"
+timber = "5.0.1"
+work-runtime-ktx = "2.9.0"
 
 
 [plugins]
@@ -52,6 +54,7 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
@@ -60,6 +63,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2-kotlinx-serialization-converter" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 
 [bundles]
