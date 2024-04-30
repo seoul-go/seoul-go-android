@@ -59,9 +59,9 @@ fun NavGraphBuilder.addSearchNavGraph(rootNavController: NavHostController) {
 fun NavGraphBuilder.addEventNavGraph(navHostController: NavHostController) {
     navigation(
         route = Route.EVENT,
-        startDestination = EventNavItem.EVENT_DETAIL.route
+        startDestination = EventNavItem.EVENT_DETAIL.route + "/{codeName}"
     ) {
-        composable(EventNavItem.EVENT_DETAIL.route) {
+        composable(EventNavItem.EVENT_DETAIL.route + "/{codeName}") {
             EventDetailScreen()
         }
     }

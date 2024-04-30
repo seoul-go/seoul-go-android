@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.jbrunoo.seoul_go.R
+import com.jbrunoo.seoul_go.presentation.navigation.EventNavItem
 import com.jbrunoo.seoul_go.presentation.navigation.Route
 import com.jbrunoo.seoul_go.presentation.ui.theme.LocalAppDimens
 
@@ -33,7 +34,9 @@ fun HomeScreen(
 ) {
     Column {
         // 최근 업데이트 행사 Box 추가 예정
-        EventCategoryGrid(onClickCategory = { rootNavController.navigate(Route.EVENT + "/${it}") })
+        EventCategoryGrid { codeName ->
+            rootNavController.navigate(EventNavItem.EVENT_DETAIL.route + "/$codeName")
+        }
     }
 }
 
@@ -67,7 +70,8 @@ private fun CategoryCard(category: EventCategory, onClickCategory: (String) -> U
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Image(painter = painterResource(category.image),
+            Image(
+                painter = painterResource(category.image),
                 modifier = Modifier.size(36.dp),
                 contentDescription = category.label,
             )

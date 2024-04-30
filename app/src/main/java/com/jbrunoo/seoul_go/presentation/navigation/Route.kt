@@ -11,7 +11,7 @@ object Route {
 }
 
 sealed class LoginNavItem(val route: String) {
-    data object LOGIN : LoginNavItem(route = "login-detail")
+    data object LOGIN : LoginNavItem(route = "login_detail")
 }
 
 sealed class MainNavItem(
@@ -34,9 +34,9 @@ sealed class MainNavItem(
 }
 
 sealed class SearchNavItem(val route: String) {
-    data object SEARCH_DETAIL : SearchNavItem("search-detail")
+    data object SEARCH_DETAIL : SearchNavItem("search_detail")
 }
 
 sealed class EventNavItem(val route: String) {
-    data object EVENT_DETAIL : EventNavItem("event-detail")
+    data object EVENT_DETAIL : EventNavItem("event_detail")
 }
