@@ -101,4 +101,6 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
     // timber(logger)
     implementation(libs.timber)
+    // collectAsStateWithLifecycle
+    implementation(libs.androidx.lifecycle.runtime.compose)
 }
