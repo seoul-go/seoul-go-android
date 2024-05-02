@@ -4,10 +4,7 @@ import com.jbrunoo.seoul_go.data.dataSource.remote.dto.EventResponse
 import kotlinx.coroutines.flow.Flow
 
 interface EventRemoteDataSource {
-    fun fetchEventsByCodeNameFlow(codeName: String) : Flow<EventResponse>
+    fun fetchEventsByCodeNameFlow(codeName: String, title: String = " ") : Flow<EventResponse>
 
-
-//    suspend fun fetchRecentFiveEvents(endIndex: Int = 5, codeName: String) : Flow<EventResponse>
-    fun searchEventsFlow(codeName: String, title: String) : Flow<EventResponse>
-
+    fun fetchRecentEventsFlow(endIndex: Int) : Flow<EventResponse>
 }

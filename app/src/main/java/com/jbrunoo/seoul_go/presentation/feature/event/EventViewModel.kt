@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jbrunoo.seoul_go.common.Resource
 import com.jbrunoo.seoul_go.domain.model.Event
-import com.jbrunoo.seoul_go.domain.useCase.event.FetchEventUseCase
+import com.jbrunoo.seoul_go.domain.useCase.event.FetchEventsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventViewModel @Inject constructor(
-    private val fetchEventUseCase: FetchEventUseCase,
+    private val fetchEventUseCase: FetchEventsUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private var _events = MutableStateFlow<List<Event>>(emptyList())
