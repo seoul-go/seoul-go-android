@@ -1,6 +1,8 @@
 package com.jbrunoo.seoul_go.data.dataSource.remote.dto
 
 
+import com.jbrunoo.seoul_go.domain.model.Event
+import com.jbrunoo.seoul_go.domain.model.RecentEventImage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -51,3 +53,37 @@ data class Row(
     @SerialName("USE_TRGT")
     val useTrgt: String
 )
+
+fun Row.toEvent(): Event {
+    return Event(
+        codeName = codeName,
+        date = date,
+        endDate = endDate,
+        etcDesc = etcDesc,
+        guName = guName,
+        isFree = isFree,
+        lat = lat,
+        lot = lot,
+        mainImg = mainImg,
+        orgLink = orgLink,
+        orgName = orgName,
+        place = place,
+        player = player,
+        program = program,
+        rgstDate = rgstDate,
+        strtDate = strtDate,
+        themeCode = themeCode,
+        ticket = ticket,
+        title = title,
+        useFee = useFee,
+        useTrgt = useTrgt,
+        isFavorite = false
+    )
+}
+
+fun Row.toRecentEventImage(): RecentEventImage {
+    return RecentEventImage(
+        title = title,
+        mainImg = mainImg
+    )
+}

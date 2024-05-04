@@ -97,5 +97,10 @@ dependencies {
     implementation(libs.coil.compose)
     // material
     implementation(libs.androidx.material)
-
+    // workManager // Kotlin + coroutines
+    implementation(libs.androidx.work.runtime.ktx)
+    // timber(logger)
+    implementation(libs.timber)
+    // collectAsStateWithLifecycle
+    implementation(libs.androidx.lifecycle.runtime.compose)
 }

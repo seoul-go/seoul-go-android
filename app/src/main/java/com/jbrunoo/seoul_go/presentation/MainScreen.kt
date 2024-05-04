@@ -40,7 +40,7 @@ fun MainScreen(
                         rootNavController.navigate(SearchNavItem.SEARCH_DETAIL.route)
                     }
                 ) {
-                    Text(text = title, modifier = Modifier.offset(x = (-16).dp))
+                    Text(text = title, modifier = Modifier.offset(x = if(!isHomeScreen) (-16).dp else 0.dp))
                 }
             }
         },

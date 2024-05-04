@@ -8,9 +8,15 @@ import javax.inject.Inject
 
 class EventRemoteDataSourceImpl @Inject constructor(private val eventService: EventService) :
     EventRemoteDataSource {
-    override suspend fun fetchEvents(): Flow<EventResponse> {
+    override fun fetchEventsByCodeNameFlow(codeName: String, title: String): Flow<EventResponse> {
         return flow {
-            emit(eventService.getEvents())
+            emit(eventService.getEvents(codeName = codeName, title = title))
+        }
+    }
+
+    override fun fetchRecentEventsFlow(endIndex: Int): Flow<EventResponse> {
+        return flow {
+            emit(eventService.getEvents(endIndex = endIndex))
         }
     }
 }
