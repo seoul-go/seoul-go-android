@@ -36,6 +36,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.jbrunoo.seoul_go.R
@@ -48,8 +50,9 @@ import timber.log.Timber
 @Composable
 fun HomeScreen(
     rootNavController: NavHostController,
-    state: RecentImageState
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
+    val state = viewModel.state.collectAsStateWithLifecycle().value
     val pagerState = rememberPagerState(
         initialPage = state.pagerCount,
         pageCount = { state.pagerCount })
@@ -98,17 +101,17 @@ fun BannerImagePager(
             .clip(RoundedCornerShape(20.dp))
             .padding(horizontal = LocalAppDimens.current.appPadding)
     ) {
-        HorizontalPager(
-            state = pagerState
-        ) { page ->
-            if (state.isLoading) {
-                CircularProgressIndicator(
-                    color = Color.Black,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .align(Alignment.Center)
-                )
-            } else if (state.recentEventImage.isNotEmpty()) {
+        if (state.isLoading) {
+            CircularProgressIndicator(
+                color = Color.Black,
+                modifier = Modifier
+                    .align(Alignment.Center)
+            )
+        } else if (state.recentEventImage.isNotEmpty()) {
+            HorizontalPager(
+                state = pagerState
+            ) { page ->
+
                 val pageIndex = page % state.recentEventImage.size
                 AsyncImage(
                     model = state.recentEventImage[pageIndex].mainImg,
@@ -119,23 +122,23 @@ fun BannerImagePager(
                         .clickable { onCardClick(state.recentEventImage[pageIndex].title) },
                     contentScale = ContentScale.FillWidth
                 )
-            } else {
-                Text(text = "사진을 불러올 수 없습니다")
             }
-        }
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(bottom = 16.dp, end = 16.dp)
-                .background(Color.LightGray, RoundedCornerShape(20.dp))
-        ) {
-            if (state.recentEventImage.isNotEmpty()) {
-                Text(
-                    modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp),
-                    text = "${pagerState.currentPage % state.recentEventImage.size + 1} / ${state.recentEventImage.size}",
-                    color = Color.White
-                )
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(bottom = 16.dp, end = 16.dp)
+                    .background(Color.LightGray, RoundedCornerShape(20.dp))
+            ) {
+                if (state.recentEventImage.isNotEmpty()) {
+                    Text(
+                        modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp),
+                        text = "${pagerState.currentPage % state.recentEventImage.size + 1} / ${state.recentEventImage.size}",
+                        color = Color.White
+                    )
+                }
             }
+        } else {
+            Text(text = "사진을 불러올 수 없습니다")
         }
     }
 }
