@@ -32,9 +32,7 @@ fun MainNavHost(
         route = Route.MAIN
     ) {
         composable(MainNavItem.HOME.route) {
-            val viewModel: HomeViewModel = hiltViewModel()
-            val events = viewModel.state.value
-            HomeScreen(rootNavController, events)
+            HomeScreen(rootNavController)
         }
         composable(MainNavItem.LIKE.route) {
             LikeScreen()
