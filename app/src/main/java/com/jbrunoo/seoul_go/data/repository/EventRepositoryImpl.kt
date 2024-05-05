@@ -9,6 +9,7 @@ import com.jbrunoo.seoul_go.domain.model.Event
 import com.jbrunoo.seoul_go.domain.model.RecentEventImage
 import com.jbrunoo.seoul_go.domain.repository.EventRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import timber.log.Timber
@@ -21,34 +22,45 @@ class EventRepositoryImpl @Inject constructor(private val eventRemoteDataSource:
         codeName: String,
         title: String
     ): Flow<Resource<List<Event>>> {
-        return eventRemoteDataSource.fetchEventsByCodeNameFlow(codeName = codeName, title = title)
-            .map { eventResponse ->
-                val result = eventResponse.culturalEventInfo.result
-                val row = eventResponse.culturalEventInfo.row
+        return flow {
+            emit(Resource.Loading())
+            eventRemoteDataSource.fetchEventsByCodeNameFlow(codeName = codeName, title = title)
+                .map { eventResponse ->
+                    val result = eventResponse.culturalEventInfo.result
+                    val row = eventResponse.culturalEventInfo.row
 
-                if(result.code == "INFO-000") {
-                    Timber.d("SUCCESS")
-                    val events = row.map { it.toEvent() }
-                    Resource.Success(events)
-                } else {
-                    handleResult(result = result)
+                    if (result.code == "INFO-000") {
+                        Timber.d("SUCCESS")
+                        val events = row.map { it.toEvent() }
+                        Resource.Success(events)
+                    } else {
+                        handleResult(result = result)
+                    }
+                }.collect {
+                    emit(it)
                 }
-            }
+        }
     }
 
     override fun fetchRecentEventsFlow(endIndex: Int): Flow<Resource<List<RecentEventImage>>> {
-        return eventRemoteDataSource.fetchRecentEventsFlow(endIndex = endIndex).map { eventResponse ->
-                val result = eventResponse.culturalEventInfo.result
-                val row = eventResponse.culturalEventInfo.row
-
-                if(result.code == "INFO-000") {
-                    Timber.d("SUCCESS")
-                    val eventImages = row.map { it.toRecentEventImage() }
-                    Resource.Success(eventImages)
-                } else {
-                    handleResult(result = result)
+        return flow {
+            emit(Resource.Loading())
+            Timber.d("Loading")
+            eventRemoteDataSource.fetchRecentEventsFlow(endIndex = endIndex)
+                .map { eventResponse ->
+                    val result = eventResponse.culturalEventInfo.result
+                    val row = eventResponse.culturalEventInfo.row
+                    if (result.code == "INFO-000") {
+                        Timber.d("SUCCESS")
+                        val eventImages = row.map { it.toRecentEventImage() }
+                        Resource.Success(eventImages)
+                    } else {
+                        handleResult(result = result)
+                    }
+                }.collect {
+                    emit(it)
                 }
-            }
+        }
     }
 
     private inline fun <reified T> handleResult(result: RESULT): Resource<T> {
@@ -58,10 +70,12 @@ class EventRepositoryImpl @Inject constructor(private val eventRemoteDataSource:
                     Timber.d("INFO-200")
                     Resource.Error(message = result.message)
                 }
+
                 "ERROR-500", "ERROR-600", "ERROR-601" -> {
                     Timber.d("SERVER-ERROR")
                     Resource.Error(message = "서버 데이터 점검 중 입니다.")
                 }
+
                 else -> {
                     Timber.d("OTHER ERRORS")
                     Resource.Error(message = "데이터 요청에 실패하였습니다")
@@ -72,7 +86,7 @@ class EventRepositoryImpl @Inject constructor(private val eventRemoteDataSource:
             Resource.Error(e.localizedMessage ?: "HTTP EXCEPTION")
         } catch (e: IOException) {
             Timber.d("IO EXCEPTION")
-            Resource.Error("IO EXCEPTION")
+            Resource.Error(e.localizedMessage ?: "IO EXCEPTION")
         }
     }
 }
