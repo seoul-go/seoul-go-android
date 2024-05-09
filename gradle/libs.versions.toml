@@ -24,6 +24,7 @@ hilt-navigation-compose = "1.2.0"
 coil-compose = "2.6.0"
 timber = "5.0.1"
 work-runtime-ktx = "2.9.0"
+browser = "1.8.0"
 
 
 [plugins]
@@ -65,6 +66,7 @@ okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2-kotlinx-serialization-converter" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+androidx-browser = { group = "androidx.browser", name = "browser", version.ref = "browser" }
 
 
 [bundles]
