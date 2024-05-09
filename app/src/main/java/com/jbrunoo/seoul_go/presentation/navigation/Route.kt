@@ -10,8 +10,8 @@ object Route {
     const val EVENT = "event"
 }
 
-sealed class LoginNavItem(val route: String) {
-    data object LOGIN : LoginNavItem(route = "login_detail")
+sealed class LoginRoute(val route: String) {
+    data object LOGIN : LoginRoute(route = "login_detail")
 }
 
 sealed class MainNavItem(
@@ -33,10 +33,11 @@ sealed class MainNavItem(
         MainNavItem(route = "user", title = "마이페이지", icon = R.drawable.user_light, label = "마이")
 }
 
-sealed class SearchNavItem(val route: String) {
-    data object SEARCH_DETAIL : SearchNavItem("search_detail")
+sealed class SearchRoute(val route: String) {
+    data object SEARCH_DETAIL : SearchRoute("search_detail")
 }
 
-sealed class EventNavItem(val route: String) {
-    data object EVENT_DETAIL : EventNavItem("event_detail")
+sealed class EventRoute(val route: String) {
+    data object EVENT_HOME : EventRoute("event_home")
+    data object EVENT_DETAIL : EventRoute("event_detail")
 }
