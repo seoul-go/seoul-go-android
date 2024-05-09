@@ -15,7 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.jbrunoo.seoul_go.presentation.components.BottomBar
 import com.jbrunoo.seoul_go.presentation.components.TopBar
 import com.jbrunoo.seoul_go.presentation.navigation.MainNavItem
-import com.jbrunoo.seoul_go.presentation.navigation.SearchNavItem
+import com.jbrunoo.seoul_go.presentation.navigation.SearchRoute
 import com.jbrunoo.seoul_go.presentation.navigation.navHost.MainNavHost
 
 @Composable
@@ -37,7 +37,7 @@ fun MainScreen(
                     isHomeScreen = isHomeScreen,
                     navigateUp = { mainNavController.navigateUp() },
                     navigateToSearch = {
-                        rootNavController.navigate(SearchNavItem.SEARCH_DETAIL.route)
+                        rootNavController.navigate(SearchRoute.SEARCH_DETAIL.route)
                     }
                 ) {
                     Text(text = title, modifier = Modifier.offset(x = if(!isHomeScreen) (-16).dp else 0.dp))
