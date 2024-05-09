@@ -35,8 +35,7 @@ object ApiModule {
         queryInterceptor: QueryInterceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
-            .addNetworkInterceptor(queryInterceptor)
-//            .addInterceptor(queryInterceptor)
+            .addInterceptor(queryInterceptor)
             .build()
 
     @Provides
