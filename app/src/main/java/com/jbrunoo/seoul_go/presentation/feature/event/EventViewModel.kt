@@ -22,7 +22,7 @@ class EventViewModel @Inject constructor(
     private var _events = MutableStateFlow<List<Event>>(emptyList())
     val events = _events.asStateFlow()
 
-    private val codeName: String = checkNotNull(savedStateHandle["codeName"])
+    val codeName: String = checkNotNull(savedStateHandle["codeName"]) // 기본적으로 nullable type
 
     init {
         fetchEvent(codeName = codeName)
