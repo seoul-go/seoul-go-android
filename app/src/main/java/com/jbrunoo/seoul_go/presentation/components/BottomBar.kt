@@ -4,10 +4,14 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.ripple.LocalRippleTheme
+import androidx.compose.material.ripple.RippleAlpha
+import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -30,42 +34,68 @@ fun BottomBar(
         MainNavItem.MAP,
         MainNavItem.USER,
     )
-
-    BottomNavigation(
-        modifier = Modifier
-            .clip(RoundedCornerShape(topStart = LocalAppDimens.current.cornerRadius, topEnd = LocalAppDimens.current.cornerRadius))
-            .border(1.dp, Color.LightGray, RoundedCornerShape(topStart = LocalAppDimens.current.cornerRadius, topEnd = LocalAppDimens.current.cornerRadius)),
-        backgroundColor = MaterialTheme.colorScheme.background
-    ) {
-        navItems.forEach { item ->
-            val selected = currentRoute == item.route
-            BottomNavigationItem(
-                selected = selected,
-                onClick = {
-                    navHostController.navigate(item.route) {
-                        popUpTo(navHostController.graph.startDestinationId) {
-                            saveState = true
+    CompositionLocalProvider(LocalRippleTheme provides CustomRippleTheme()) {
+        BottomNavigation(
+            modifier = Modifier
+                .clip(
+                    RoundedCornerShape(
+                        topStart = LocalAppDimens.current.cornerRadius,
+                        topEnd = LocalAppDimens.current.cornerRadius
+                    )
+                )
+                .border(
+                    1.dp,
+                    Color.LightGray,
+                    RoundedCornerShape(
+                        topStart = LocalAppDimens.current.cornerRadius,
+                        topEnd = LocalAppDimens.current.cornerRadius
+                    )
+                ),
+            backgroundColor = MaterialTheme.colorScheme.background
+        ) {
+            navItems.forEach { item ->
+                val selected = currentRoute == item.route
+                BottomNavigationItem(
+                    selected = selected,
+                    onClick = {
+                        navHostController.navigate(item.route) {
+                            popUpTo(navHostController.graph.startDestinationId) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
-                icon = {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(item.icon),
-                        contentDescription = null,
-                        tint = if (selected) MaterialTheme.colorScheme.primary else Color.Black
-                    )
-                },
-                label = {
-                    Text(
-                        text = item.label,
-                        color = if (selected) MaterialTheme.colorScheme.primary else Color.Black,
-                        fontSize = 10.sp
-                    )
-                },
-                selectedContentColor = MaterialTheme.colorScheme.primary
-            )
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(item.icon),
+                            contentDescription = null,
+                            tint = if (selected) MaterialTheme.colorScheme.primary else Color.Black
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = item.label,
+                            color = if (selected) MaterialTheme.colorScheme.primary else Color.Black,
+                            fontSize = 10.sp
+                        )
+                    },
+                    selectedContentColor = MaterialTheme.colorScheme.primary
+                )
+            }
         }
     }
+}
+
+private class CustomRippleTheme : RippleTheme {
+    @Composable
+    override fun defaultColor(): Color = Color.Unspecified
+
+    @Composable
+    override fun rippleAlpha(): RippleAlpha = RippleAlpha(
+        draggedAlpha = 0f,
+        focusedAlpha = 0f,
+        hoveredAlpha = 0f,
+        pressedAlpha = 0f,
+    )
 }
