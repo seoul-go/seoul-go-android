@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.jbrunoo.seoul_go.R
 
 @Composable
-fun TopBar(isHomeScreen: Boolean, navigateUp: () -> Unit, navigateToSearch: () -> Unit, titleContent: @Composable () -> Unit) {
+fun TopBar(isHomeScreen: Boolean, navigateUp: () -> Unit = {}, navigateToSearch: () -> Unit = {}, titleContent: @Composable () -> Unit) {
     TopAppBar(
         title = { titleContent() },
         navigationIcon = if(!isHomeScreen) {
