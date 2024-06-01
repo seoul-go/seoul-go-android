@@ -3,6 +3,7 @@ package com.jbrunoo.seoul_go.presentation.feature.event
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jbrunoo.seoul_go.common.EventOrder
 import com.jbrunoo.seoul_go.common.Resource
 import com.jbrunoo.seoul_go.domain.model.Event
 import com.jbrunoo.seoul_go.domain.useCase.event.FetchEventsUseCase
@@ -24,12 +25,19 @@ class EventViewModel @Inject constructor(
 
     val codeName: String = checkNotNull(savedStateHandle["codeName"]) // 기본적으로 nullable type
 
+    private var _eventOrder = MutableStateFlow<EventOrder>(EventOrder.ByRegistration)
+    private val eventOrder = _eventOrder.asStateFlow()
+
     init {
-        fetchEvent(codeName = codeName)
+        fetchEvent(codeName = codeName, eventOrder.value)
     }
 
-    private fun fetchEvent(codeName: String) {
-        fetchEventUseCase(codeName = codeName).onEach { result ->
+    fun sortEvent(eventOrder: EventOrder) {
+        fetchEvent(codeName = codeName, eventOrder = eventOrder)
+    }
+
+    private fun fetchEvent(codeName: String, eventOrder: EventOrder = EventOrder.ByRegistration) {
+        fetchEventUseCase(codeName = codeName, eventOrder = eventOrder).onEach { result ->
             when (result) {
                 is Resource.Success -> _events.value = result.data ?: emptyList()
                 is Resource.Error -> _events.value = emptyList()
