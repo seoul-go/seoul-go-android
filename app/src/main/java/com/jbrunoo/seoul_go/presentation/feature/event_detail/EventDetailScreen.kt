@@ -30,26 +30,30 @@ fun EventDetailScreen(
                 isHomeScreen = false,
                 navigateUp = { rootNavController.navigateUp() },
                 navigateToSearch = { rootNavController.navigate(SearchRoute.SEARCH_DETAIL.route) }) {
-                if(event.value.isNotEmpty()) event.value[0].title
+                if (event.value.isNotEmpty()) Text(event.value[0].title)
+            }
+        },
+        bottomBar = {
+            Button(onClick = {
+                val customTabsIntent = CustomTabsIntent.Builder().build()
+                customTabsIntent.launchUrl(context, Uri.parse(event.value[0].orgLink))
+            }) {
+                Text(text = "홈페이지 예약")
             }
         }
     ) { paddingValues ->
-        if(event.value.isNotEmpty()) {
+        if (event.value.isNotEmpty()) {
             Column(
-                modifier = Modifier.padding(top = paddingValues.calculateTopPadding())
+                modifier = Modifier.padding(
+                    top = paddingValues.calculateTopPadding(),
+                    bottom = paddingValues.calculateBottomPadding()
+                )
             ) {
                 AsyncImage(model = event.value[0].mainImg, contentDescription = "event_main_image")
                 Text(text = event.value[0].date)
                 Text(text = event.value[0].date)
                 Text(text = event.value[0].date)
                 Text(text = event.value[0].date)
-
-                Button(onClick = {
-                    val customTabsIntent = CustomTabsIntent.Builder().build()
-                    customTabsIntent.launchUrl(context, Uri.parse(event.value[0].orgLink))
-                }) {
-                    Text(text = "홈페이지 예약")
-                }
             }
         }
     }
