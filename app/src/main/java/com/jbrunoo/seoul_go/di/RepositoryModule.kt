@@ -1,7 +1,9 @@
 package com.jbrunoo.seoul_go.di
 
+import com.jbrunoo.seoul_go.data.repository.AuthRepositoryImpl
 import com.jbrunoo.seoul_go.data.repository.EventRepositoryImpl
 import com.jbrunoo.seoul_go.data.repository.SearchRepositoryImpl
+import com.jbrunoo.seoul_go.domain.repository.AuthRepository
 import com.jbrunoo.seoul_go.domain.repository.EventRepository
 import com.jbrunoo.seoul_go.domain.repository.SearchRepository
 import dagger.Binds
@@ -13,6 +15,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+
+    @Binds
+    @Singleton
+    abstract fun provideAuthRepo(authRepositoryImpl: AuthRepositoryImpl): AuthRepository
 
     @Binds
     @Singleton
