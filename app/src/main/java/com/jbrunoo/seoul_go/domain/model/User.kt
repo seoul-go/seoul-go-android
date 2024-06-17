@@ -5,5 +5,5 @@ import android.net.Uri
 data class User(
     val id: String,
     val userName: String? = null,
-    val userProfileUri: Uri? = null
+    val userProfileUri: String? = null
 )

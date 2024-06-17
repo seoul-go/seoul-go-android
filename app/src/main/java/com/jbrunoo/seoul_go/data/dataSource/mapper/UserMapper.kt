@@ -8,7 +8,7 @@ fun UserEntity.toUser(): User {
     return User(
         id = this.id,
         userName = this.displayedName,
-        userProfileUri = Uri.parse(this.profilePictureUri)
+        userProfileUri = this.profilePictureUri
     )
 }
 
