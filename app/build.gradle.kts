@@ -107,6 +107,8 @@ dependencies {
     implementation(libs.timber)
     // collectAsStateWithLifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
+    // lottie
+    implementation(libs.lottie.compose)
     // Google Credential Manager(authentication)
     implementation(libs.bundles.gooleCredentialManager)
     // authorization
