@@ -3,7 +3,7 @@ package com.jbrunoo.seoul_go.data.dataSource.local.room.search
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SearchLocalDataSourceImpl @Inject constructor(val searchHistoryDao: SearchHistoryDao) : SearchLocalDataSource {
+class SearchLocalDataSourceImpl @Inject constructor(private val searchHistoryDao: SearchHistoryDao) : SearchLocalDataSource {
     override fun fetchSearchHistory(): Flow<List<SearchHistoryEntity>> {
         return searchHistoryDao.getAll()
     }
