@@ -18,7 +18,7 @@ fun TopBar(isHomeScreen: Boolean, navigateUp: () -> Unit, navigateToSearch: () -
             @Composable {
                 IconButton(onClick = navigateUp) {
                     Icon(
-                        imageVector = ImageVector.vectorResource(R.drawable.arrow_left_light),
+                        imageVector = ImageVector.vectorResource(R.drawable.icon_arrow),
                         contentDescription = "back arrow"
                     )
                 }
@@ -27,7 +27,7 @@ fun TopBar(isHomeScreen: Boolean, navigateUp: () -> Unit, navigateToSearch: () -
         actions = if(isHomeScreen) {
             @Composable {
                 IconButton(onClick = navigateToSearch) {
-                    Icon(imageVector = ImageVector.vectorResource(R.drawable.search_light), contentDescription = "search")
+                    Icon(imageVector = ImageVector.vectorResource(R.drawable.icon_search), contentDescription = "search")
                 }
             }
         } else {
