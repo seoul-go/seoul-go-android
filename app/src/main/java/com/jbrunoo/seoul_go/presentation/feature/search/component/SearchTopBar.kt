@@ -44,7 +44,7 @@ fun SearchTopBar(
         navigationIcon = {
             IconButton(onClick = navigateUp) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.arrow_left_light),
+                    imageVector = ImageVector.vectorResource(R.drawable.icon_arrow),
                     contentDescription = "back arrow"
                 )
             }
@@ -99,14 +99,14 @@ private fun CustomTextField(
                 placeholder = { Text("행사명을 입력하세요") },
                 leadingIcon = {
                     Icon(
-                        imageVector = ImageVector.vectorResource(R.drawable.search_light),
+                        imageVector = ImageVector.vectorResource(R.drawable.icon_search),
                         contentDescription = "search"
                     )
                 },
                 trailingIcon = {
                     IconButton(onClick = { onDeleteWord(value) }) {
                         Icon(
-                            imageVector = ImageVector.vectorResource(R.drawable.close_ring),
+                            imageVector = ImageVector.vectorResource(R.drawable.icon_close_ring),
                             contentDescription = "clear all"
                         )
                     }

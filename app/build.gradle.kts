@@ -23,9 +23,13 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-
-        buildConfigField("String", "API_KEY", getProperty("API_KEY"))
+        manifestPlaceholders["kakao_native_app_key"] = "KAKAO_NATIVE_APP_KEY"
+        buildConfigField("String", "SEOUL_API_KEY", getProperty("SEOUL_API_KEY"))
         buildConfigField("String", "BASE_URL", getProperty("BASE_URL"))
+        buildConfigField("String", "SEOUL_GO_BASE_URL", getProperty("SEOUL_GO_BASE_URL"))
+        buildConfigField("String", "GOOGLE_CLIENT_ID", getProperty("GOOGLE_CLIENT_ID"))
+        buildConfigField("String", "KAKAO_NATIVE_APP_KEY", getProperty("KAKAO_NATIVE_APP_KEY"))
+
     }
 
     buildTypes {
@@ -103,4 +107,14 @@ dependencies {
     implementation(libs.timber)
     // collectAsStateWithLifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
+    // lottie
+    implementation(libs.lottie.compose)
+    // Google Credential Manager(authentication)
+    implementation(libs.bundles.gooleCredentialManager)
+    // authorization
+    implementation(libs.play.services.auth)
+    // kakao login
+    implementation(libs.v2.user)
+    // datastore(preferences)
+    implementation(libs.androidx.datastore.preferences)
 }

@@ -10,10 +10,12 @@ import com.jbrunoo.seoul_go.presentation.MainScreen
 import com.jbrunoo.seoul_go.presentation.feature.event.EventDetailScreen
 import com.jbrunoo.seoul_go.presentation.feature.login.LoginScreen
 import com.jbrunoo.seoul_go.presentation.feature.search.SearchScreen
+import com.jbrunoo.seoul_go.presentation.feature.splash.SplashScreen
 import com.jbrunoo.seoul_go.presentation.navigation.EventNavItem
 import com.jbrunoo.seoul_go.presentation.navigation.LoginNavItem
 import com.jbrunoo.seoul_go.presentation.navigation.Route
 import com.jbrunoo.seoul_go.presentation.navigation.SearchNavItem
+import com.jbrunoo.seoul_go.presentation.utils.navigateWithPopUp
 
 
 // 각 navhost마다 하나의 navHostController를 가져야 함 // else : java.lang.IllegalStateException: ViewModelStore should be set before setGraph call
@@ -22,9 +24,12 @@ import com.jbrunoo.seoul_go.presentation.navigation.SearchNavItem
 fun RootNavHost(rootNavController: NavHostController) {
     NavHost(
         navController = rootNavController,
-        startDestination = Route.MAIN, // login 확인 후 main
+        startDestination = Route.SPLASH, // login 확인 후 main
         route = Route.ROOT
     ) {
+        composable(Route.SPLASH) {
+            SplashScreen(rootNavController)
+        }
         addLoginNavGraph(rootNavController)
         composable(Route.MAIN) {
             MainScreen(rootNavController)
@@ -40,7 +45,9 @@ fun NavGraphBuilder.addLoginNavGraph(rootNavController: NavHostController) {
         startDestination = LoginNavItem.LOGIN.route
     ) {
         composable(LoginNavItem.LOGIN.route) {
-            LoginScreen() {}
+            LoginScreen(navigateToMain = {
+                rootNavController.navigateWithPopUp(Route.LOGIN, Route.MAIN)
+            })
         }
     }
 }

@@ -3,6 +3,7 @@ package com.jbrunoo.seoul_go.presentation.navigation
 import com.jbrunoo.seoul_go.R
 
 object Route {
+    const val SPLASH = "splash"
     const val ROOT = "root"
     const val LOGIN = "login"
     const val MAIN = "main"
@@ -21,16 +22,16 @@ sealed class MainNavItem(
     val label: String
 ) {
     data object HOME :
-        MainNavItem(route = "home", title = "Seoul Go", icon = R.drawable.home_light, label = "홈")
+        MainNavItem(route = "home", title = "Seoul Go", icon = R.drawable.icon_home, label = "홈")
 
     data object LIKE :
-        MainNavItem(route = "like", title = "찜", icon = R.drawable.favorite_light, label = "찜")
+        MainNavItem(route = "like", title = "찜", icon = R.drawable.icon_favorite, label = "찜")
 
     data object MAP :
-        MainNavItem(route = "map", title = "지도", icon = R.drawable.map_light, label = "지도")
+        MainNavItem(route = "map", title = "지도", icon = R.drawable.icon_map, label = "지도")
 
     data object USER :
-        MainNavItem(route = "user", title = "마이페이지", icon = R.drawable.user_light, label = "마이")
+        MainNavItem(route = "user", title = "마이페이지", icon = R.drawable.icon_user, label = "마이")
 }
 
 sealed class SearchNavItem(val route: String) {
