@@ -8,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -15,40 +16,42 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.jbrunoo.seoul_go.presentation.domain.AppState
 import com.jbrunoo.seoul_go.presentation.navigation.MainNavItem
 import com.jbrunoo.seoul_go.presentation.ui.theme.LocalAppDimens
 
 @Composable
 fun BottomBar(
-    navHostController: NavHostController,
-    currentRoute: String?
+    appState: AppState
 ) {
-    val navItems = listOf(
-        MainNavItem.HOME,
-        MainNavItem.LIKE,
-        MainNavItem.MAP,
-        MainNavItem.USER,
-    )
-
     BottomNavigation(
         modifier = Modifier
-            .clip(RoundedCornerShape(topStart = LocalAppDimens.current.cornerRadius, topEnd = LocalAppDimens.current.cornerRadius))
-            .border(1.dp, Color.LightGray, RoundedCornerShape(topStart = LocalAppDimens.current.cornerRadius, topEnd = LocalAppDimens.current.cornerRadius)),
+            .clip(
+                RoundedCornerShape(
+                    topStart = LocalAppDimens.current.cornerRadius,
+                    topEnd = LocalAppDimens.current.cornerRadius
+                )
+            )
+            .border(
+                1.dp,
+                Color.LightGray,
+                RoundedCornerShape(
+                    topStart = LocalAppDimens.current.cornerRadius,
+                    topEnd = LocalAppDimens.current.cornerRadius
+                )
+            ),
         backgroundColor = MaterialTheme.colorScheme.background
     ) {
-        navItems.forEach { item ->
+        val navBackStackEntry by appState.navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+
+        MainNavItem.items.forEach { item ->
             val selected = currentRoute == item.route
             BottomNavigationItem(
                 selected = selected,
                 onClick = {
-                    navHostController.navigate(item.route) {
-                        popUpTo(navHostController.graph.startDestinationId) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
+                    appState.navigateWithBottomBar(item.route)
                 },
                 icon = {
                     Icon(

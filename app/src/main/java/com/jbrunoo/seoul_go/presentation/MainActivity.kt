@@ -7,8 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.rememberNavController
-import com.jbrunoo.seoul_go.presentation.navigation.navHost.RootNavHost
+import com.jbrunoo.seoul_go.presentation.domain.rememberAppState
 import com.jbrunoo.seoul_go.presentation.ui.theme.Seoul_goTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,13 +16,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val appState = rememberAppState()
             Seoul_goTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    RootNavHost(rootNavController = rememberNavController())
+                    RootScaffold(appState)
                 }
             }
         }
