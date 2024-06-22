@@ -1,18 +1,15 @@
 package com.jbrunoo.seoul_go.presentation.navigation
 
 import com.jbrunoo.seoul_go.R
+// 스플래쉬, 로그인, 메인화면(홈, 좋아요, 지도, 마이페이지), 이벤트(메인, 디테일), 검색(메인, 디테일(검색매칭))
 
 object Route {
-    const val SPLASH = "splash"
     const val ROOT = "root"
+    const val SPLASH = "splash"
     const val LOGIN = "login"
     const val MAIN = "main"
-    const val SEARCH = "search"
     const val EVENT = "event"
-}
-
-sealed class LoginNavItem(val route: String) {
-    data object LOGIN : LoginNavItem(route = "login_detail")
+    const val SEARCH = "search"
 }
 
 sealed class MainNavItem(
@@ -32,12 +29,18 @@ sealed class MainNavItem(
 
     data object USER :
         MainNavItem(route = "user", title = "마이페이지", icon = R.drawable.icon_user, label = "마이")
+
+    companion object {
+        val items = listOf(HOME, LIKE, MAP, USER)
+    }
 }
 
 sealed class SearchNavItem(val route: String) {
-    data object SEARCH_DETAIL : SearchNavItem("search_detail")
+    data object MAIN : SearchNavItem("search_main")
+    data object DETAIL : SearchNavItem("search_detail")
 }
 
 sealed class EventNavItem(val route: String) {
-    data object EVENT_DETAIL : EventNavItem("event_detail")
+    data object MAIN : EventNavItem("event_main")
+    data object DETAIL : EventNavItem("event_detail")
 }
